@@ -24,6 +24,7 @@ function PrivateRoute({ component: Component, location, ...rest }) {
             }
         })();
     }, [dispatch]);
+    return <Route {...rest} render={(props) => <Component {...props} />} />;
     switch (isAuthencate) {
         case REQUEST_STATE?.SUCCESS:
             return <Route {...rest} render={(props) => <Component {...props} />} />;

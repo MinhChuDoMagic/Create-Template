@@ -18,4 +18,15 @@ export default {
     }),
 };
 
-export const childRoutes = [];
+export const childRoutes = [
+    {
+        path: '/v',
+        exact: true,
+        isPrivate: true,
+        layout: AppLayout,
+        component: lazy(async () => {
+            await initModules([featureModule], 'app');
+            return import('./pages/CreateTemplate');
+        }),
+    },
+];

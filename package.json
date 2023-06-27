@@ -2,7 +2,7 @@
     "name": "so_tiem_chung",
     "version": "1.0.0",
     "scripts": {
-        "start": "PORT=3500 react-app-rewired start",
+        "start": "react-app-rewired start",
         "build": "react-app-rewired build",
         "test": "react-app-rewired test",
         "eject": "react-app-rewired eject",
@@ -12,10 +12,13 @@
     "dependencies": {
         "@adobe/redux-saga-promise": "^1.1.1",
         "@ant-design/icons": "^4.7.0",
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
         "@fortawesome/free-regular-svg-icons": "^6.1.1",
         "@fortawesome/free-solid-svg-icons": "^6.1.1",
         "@fortawesome/react-fontawesome": "^0.1.18",
+        "@mui/material": "^5.13.6",
         "antd": "4.20.0-alpha.1",
         "axios": "^0.23.0",
         "connected-react-router": "^6.9.2",

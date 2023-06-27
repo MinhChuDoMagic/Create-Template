@@ -58,3 +58,19 @@ export const ACCOUNT_PERMISSION = {
 export const EXPIRED_TIME_CONTRACT = 1683962780;
 
 export const ADDRESS_OWNER_MANAGEMENT = '0xc7e0ae64b03d6bef827209dcd700a5039c071e6d';
+
+export const UploadTypes = {
+    PDF: 'pdf',
+    FONT: 'font',
+};
+
+export const SignTypes = {
+    VISIBLE: {
+        type: 'Visible',
+        desc: 'Ký hiện',
+    },
+    INVISIBLE: {
+        type: 'InVisible',
+        desc: 'Ký ẩn',
+    },
+};

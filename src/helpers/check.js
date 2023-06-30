@@ -23,3 +23,10 @@ export const isEmptyValue = (value) => {
 export const isExist = (value) => {
     return !isEmptyValue(value);
 };
+
+export const isHexColor = (color) => {
+    // Regular expression to match hex color code pattern
+    const hexColorRegex = /^#([0-9A-F]{3}){1,2}$/i;
+    // Check if the color matches the regex pattern
+    return hexColorRegex.test(color);
+};

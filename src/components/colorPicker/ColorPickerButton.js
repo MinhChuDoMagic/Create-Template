@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import reactCSS from 'reactcss';
 import { BlockPicker } from 'react-color';
-import { Col, Input, Row } from 'antd';
-import { isHexColor } from '~/helpers/check';
 
-const ColorPicker = () => {
+const ColorPickerButton = ({ onSelect = () => {} }) => {
     const [displayColorPicker, setDisplayColorPicker] = useState(false);
     const [color, setColor] = useState('#000000');
 
@@ -18,27 +16,32 @@ const ColorPicker = () => {
 
     const handleChange = (newColor) => {
         setColor(newColor.hex);
+        onSelect(color);
     };
 
     const styles = reactCSS({
         default: {
             color: {
                 width: '45px',
-                height: '21px',
+                height: '25px',
                 borderRadius: '2px',
                 background: `${color}`,
             },
             swatch: {
                 padding: '5px',
                 background: '#fff',
-                borderRadius: '1px',
+                border: '1px solid #333',
                 boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
                 display: 'inline-block',
                 cursor: 'pointer',
+                marginRight: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
             },
             popover: {
                 position: 'absolute',
-                margin: '10px 0px 10px 30px',
+                margin: '10px 0px 10px -55px',
                 zIndex: '2',
             },
             cover: {
@@ -51,27 +54,11 @@ const ColorPicker = () => {
         },
     });
 
-    const onInputChange = (e) => {
-        setColor(e.target.value);
-        if (isHexColor(e.target.value)) {
-            setColor(e.target.value);
-        }
-    };
-
     return (
         <div>
-            <Input.Group>
-                <Row gutter={8}>
-                    <Col span={12}>
-                        <Input onChange={onInputChange} value={color} />
-                    </Col>
-                    <Col span={8}>
-                        <div style={styles.swatch} onClick={handleClick}>
-                            <div style={styles.color} />
-                        </div>
-                    </Col>
-                </Row>
-            </Input.Group>
+            <div style={styles.swatch} onClick={handleClick}>
+                <div style={styles.color} />
+            </div>
 
             {displayColorPicker && (
                 <div style={styles.popover}>
@@ -83,4 +70,4 @@ const ColorPicker = () => {
     );
 };
 
-export default ColorPicker;
+export default ColorPickerButton;

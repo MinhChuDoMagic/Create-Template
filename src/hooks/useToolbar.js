@@ -21,6 +21,7 @@ import { isExist } from '~/helpers/check';
 import store from '~/redux';
 import SelectWithInput from '~/containers/app/screens/Feature/components/SelectWithInput/SelectWithInput';
 import SelectWithSearch from '~/containers/app/screens/Feature/components/SelectWithSearch/SelectWithSearch';
+import ColorPickerButton from '~/components/colorPicker/ColorPickerButton';
 
 export const TOOLBAR_STATUS = {
     ACTIVATE: 'activate',
@@ -41,6 +42,7 @@ export const TOOLBAR_TYPES = {
     ALIGN_CENTER: 'aligncenter',
     ALIGN_BOTTOM: 'alignbottom',
     FONT_FAMILY: 'fontfamily',
+    TEXT_COLOR: 'textcolor',
 };
 
 export const GROUP_NAMES = {
@@ -51,6 +53,7 @@ export const GROUP_NAMES = {
     JUSTIFY_HORIZONTAL: 'justify_horizontal',
     ALIGN_VERTICAL: 'align_vertical',
     FONT_FAMILY: 'fontfamily',
+    TEXT_COLOR: 'textcolor',
 };
 
 export const STYLES_DICTIONARY = {
@@ -495,6 +498,32 @@ export const JustifyRight = {
     type: TOOLBAR_TYPES.JUSTIFY_RIGHT,
 };
 
+export const TextColor = {
+    component: function (toolbar, listToolbars) {
+        return (
+            <ColorPickerButton
+                onSelect={(value) => {
+                    toolbar.onClick(toolbar, listToolbars, value);
+                }}
+            />
+        );
+    },
+    group: {
+        isOnlySelectOne: true,
+        name: GROUP_NAMES.TEXT_COLOR,
+    },
+    onClick: function (toolbar, listToolbars, value) {
+        if (toolbar?.status === TOOLBAR_STATUS.DISABLED) {
+            return;
+        }
+        if (isExist(value)) {
+            store.dispatch(ACTIVATE_TOOLBAR({ type: this.type, value: value, group: this.group }));
+        }
+    },
+    status: TOOLBAR_STATUS.DEACTIVATE,
+    type: TOOLBAR_TYPES.TEXT_COLOR,
+};
+
 export const FontFamily = {
     component: function (toolbar, listToolbars, selectedAttachment) {
         return (
@@ -525,7 +554,17 @@ export const useToolbars = () => {
     const dispatch = useDispatch();
     const toolbars = useSelector((state) => state.feature.toolbars);
 
-    const listToolbars = [Bold, Italic, Underline, FontSize, FontFamily, JustifyLeft, JustifyCenter, JustifyRight];
+    const listToolbars = [
+        Bold,
+        Italic,
+        Underline,
+        FontSize,
+        FontFamily,
+        TextColor,
+        JustifyLeft,
+        JustifyCenter,
+        JustifyRight,
+    ];
 
     const initializeToolbars = () => {
         dispatch(SET_TOOLBARS({ listToolbars: listToolbars }));

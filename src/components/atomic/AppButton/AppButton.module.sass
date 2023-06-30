@@ -1,0 +1,45 @@
+.app-button
+    height: 35px
+    background-color: #1B709B
+    border: 2px solid #1B709B
+    border-radius: 5px
+    font-weight: 600
+    transition: all 0.5s ease
+    color: #fff
+    min-width: 100px
+    font-size: 14px
+    padding: 5px 15px
+    user-select: none
+    &-white
+        background-color: white
+        color: #1B709B
+        border: 2px solid #1B709B
+    &-blue
+        background-color: white 
+        color: rgb(27, 112, 155)
+        border: 2px solid rgb(27, 112, 155)
+        &:hover
+            background-color: rgb(27, 112, 155) !important
+            border: 2px solid rgb(27, 112, 155) !important
+            color: #fff
+    &-orange
+        background-color: white 
+        color: #CC3636
+        border: 2px solid #CC3636
+        &:hover
+            background-color: #CC3636 !important
+            border: 2px solid #CC3636 !important
+            color: #fff
+    &:hover
+        background-color: #13435B
+        border: 2px solid #13435B
+        color: #fff
+        cursor: pointer
+    &:disabled
+        background-color: #628ca1
+        border-color: #628ca1
+        cursor: not-allowed
+.flex-center
+    display: flex
+    align-items: center
+    justify-content: center

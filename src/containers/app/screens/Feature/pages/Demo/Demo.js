@@ -5,6 +5,9 @@ import { Box, Modal, Typography } from '@mui/material';
 import { UploadOutlined } from '@ant-design/icons';
 import { UploadTypes } from '~/app-configs';
 import { useUploader } from '~/hooks/useUploader';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import { useDispatch } from 'react-redux';
+import { CREATE_NEW_TEMPLATE } from '../../redux/action';
 
 const style = {
     position: 'absolute',
@@ -20,7 +23,9 @@ const style = {
 
 function Demo(props) {
     const [openModal, setOpenModal] = useState(false);
-
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const [pdfFile, setPdfFile] = useState(null);
     const {
         inputRef: pdfInput,
         handleClick: handlePdfClick,
@@ -28,13 +33,18 @@ function Demo(props) {
         upload: uploadPdf,
     } = useUploader({
         type: UploadTypes.PDF,
-        handleResult: initializePageAndAttachments,
+        handleResult: handleUploadPdf,
     });
 
-    function initializePageAndAttachments(pdfDetails) {
-        // initialize(pdfDetails);
-        // const numberOfPages = pdfDetails.pages.length;
-        // resetAttachments(numberOfPages);
+    function handleUploadPdf(pdfDetails) {
+        setPdfFile(pdfDetails);
+    }
+
+    function createTemplateHandle(values) {
+        if (pdfFile !== null) {
+            dispatch(CREATE_NEW_TEMPLATE({ ...values, file: pdfFile }));
+            history.push('/v');
+        }
     }
 
     const hiddenDocumentInput = (
@@ -61,16 +71,33 @@ function Demo(props) {
                         Tạo template
                     </Typography>
 
-                    <Form layout="vertical">
-                        <Form.Item label="Tên chứng chỉ">
+                    <Form
+                        initialValues={{
+                            useBlockchain: true,
+                        }}
+                        layout="vertical"
+                        onFinish={createTemplateHandle}
+                    >
+                        <Form.Item name="name" label="Tên chứng chỉ">
                             <Input placeholder="Tên chứng chỉ" />
                         </Form.Item>
-                        <Form.Item valuePropName="checked">
+                        <Form.Item name="useBlockchain" valuePropName="checked">
                             <Checkbox>Sử dụng blockchain</Checkbox>
                         </Form.Item>
-                        <Form.Item valuePropName="fileList">
-                            <Button icon={<UploadOutlined />} onClick={handlePdfClick}>
-                                Upload
+
+                        <Button icon={<UploadOutlined />} onClick={handlePdfClick}>
+                            Upload
+                        </Button>
+
+                        {pdfFile && <h4>{pdfFile.name}</h4>}
+
+                        <Form.Item
+                            style={{
+                                textAlign: 'right',
+                            }}
+                        >
+                            <Button type="primary" htmlType="submit">
+                                Tạo template
                             </Button>
                         </Form.Item>
                     </Form>

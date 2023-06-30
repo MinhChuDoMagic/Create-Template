@@ -13,5 +13,6 @@ export const readAsPDF = async (file) => {
     const pdfjsLib = await getAsset('pdfjsLib');
     const blob = new Blob([file]);
     const url = window.URL.createObjectURL(blob);
+    console.log(pdfjsLib, url);
     return pdfjsLib.getDocument(url).promise;
 };

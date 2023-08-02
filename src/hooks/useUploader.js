@@ -21,7 +21,7 @@ const handlers = {
         try {
             return {
                 file,
-                name: file.name,
+                name: file.name.substring(0, file.name.lastIndexOf('.')),
             };
         } catch (error) {
             console.log('Failed to load font', error);

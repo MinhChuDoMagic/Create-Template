@@ -8,6 +8,7 @@ import { useUploader } from '~/hooks/useUploader';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import { useDispatch } from 'react-redux';
 import { CREATE_NEW_TEMPLATE } from '../../redux/action';
+import { useAttachments } from '~/hooks/useAttachments';
 
 const style = {
     position: 'absolute',
@@ -35,9 +36,11 @@ function Demo(props) {
         type: UploadTypes.PDF,
         handleResult: handleUploadPdf,
     });
+    const { reset: resetAttachments } = useAttachments();
 
     function handleUploadPdf(pdfDetails) {
         setPdfFile(pdfDetails);
+        resetAttachments(pdfDetails.pages.length);
     }
 
     function createTemplateHandle(values) {

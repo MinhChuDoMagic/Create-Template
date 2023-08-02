@@ -74,3 +74,15 @@ export const SignTypes = {
         desc: 'Ký ẩn',
     },
 };
+
+export const ATTACHMENT_TYPES = {
+    TEXT: 'TEXT',
+    QRCODE: 'QRCODE',
+    SIGN: 'SIGN',
+};
+
+export const ATTACHMENT_STATUS = {
+    DELETED: 'delete',
+    ACTIVATE: 'activate',
+    DEACTIVATE: 'deactivate',
+};

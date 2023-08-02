@@ -38,9 +38,6 @@ export const TOOLBAR_TYPES = {
     JUSTIFY_LEFT: 'justifyleft',
     JUSTIFY_CENTER: 'justifycenter',
     JUSTIFY_RIGHT: 'justifyright',
-    ALIGN_TOP: 'aligntop',
-    ALIGN_CENTER: 'aligncenter',
-    ALIGN_BOTTOM: 'alignbottom',
     FONT_FAMILY: 'fontfamily',
     TEXT_COLOR: 'textcolor',
 };
@@ -121,30 +118,6 @@ export const STYLES_DICTIONARY = {
         },
         optionsStyle: {
             justifyContent: value,
-        },
-    }),
-    [TOOLBAR_TYPES.ALIGN_TOP]: (value = 'start') => ({
-        cssStyle: {
-            alignItems: value,
-        },
-        optionsStyle: {
-            alignItems: value,
-        },
-    }),
-    [TOOLBAR_TYPES.ALIGN_CENTER]: (value = 'center') => ({
-        cssStyle: {
-            alignItems: value,
-        },
-        optionsStyle: {
-            alignItems: value,
-        },
-    }),
-    [TOOLBAR_TYPES.ALIGN_BOTTOM]: (value = 'end') => ({
-        cssStyle: {
-            alignItems: value,
-        },
-        optionsStyle: {
-            alignItems: value,
         },
     }),
     [TOOLBAR_TYPES.FONT_FAMILY]: (value = 'aria') => ({

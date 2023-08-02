@@ -9,12 +9,15 @@ import { isEmptyValue, isExist } from '~/helpers/check';
 import { useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { useUploader } from '~/hooks/useUploader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UploadTypes } from '~/app-configs';
+import { ADD_FONT } from '../../redux/action';
+import { Button, Divider } from 'antd';
 let cx = classNames.bind(styles);
 
 function SelectWithSearch({ onSelect = () => {} }) {
-    const [listFont, setListFont] = useState(['Aria', 'Roboto', 'Times New Roman']);
+    const listFont = useSelector((state) => state.feature.fonts.fontName);
+    const dispatch = useDispatch();
 
     const [confirmedValue, setConfirmedValue] = useState('');
     const [searchParams, setSearchParams] = useState(listFont[0]);
@@ -69,7 +72,7 @@ function SelectWithSearch({ onSelect = () => {} }) {
     });
 
     function initializeFont(fontDetails) {
-        setListFont([...listFont, fontDetails.name.substring(0, fontDetails.name.lastIndexOf('.'))]);
+        dispatch(ADD_FONT(fontDetails));
     }
 
     const hiddenFontInputs = (
@@ -124,13 +127,14 @@ function SelectWithSearch({ onSelect = () => {} }) {
                             </li>
                         );
                     })}
-                    <li
-                        key="hehe"
-                        className={cx('dropdown-item', matchValue === 'addFont' ? 'active' : '')}
-                        onClick={handleFontClick}
-                    >
-                        <PlusOutlined /> Thêm font
-                    </li>
+                    <Divider
+                        style={{
+                            margin: '8px 0 0 0',
+                        }}
+                    />
+                    <Button type="text" icon={<PlusOutlined />} onClick={handleFontClick} style={{ width: '100%' }}>
+                        Thêm font
+                    </Button>
                 </ul>
             )}
         </span>

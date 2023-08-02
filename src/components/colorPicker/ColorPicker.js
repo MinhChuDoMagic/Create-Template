@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import reactCSS from 'reactcss';
 import { BlockPicker } from 'react-color';
-import { Col, Input, Row } from 'antd';
+import { Col, Form, Input, Row } from 'antd';
 import { isHexColor } from '~/helpers/check';
 
-const ColorPicker = () => {
+const ColorPicker = ({ side }) => {
     const [displayColorPicker, setDisplayColorPicker] = useState(false);
     const [color, setColor] = useState('#000000');
 
@@ -59,11 +59,13 @@ const ColorPicker = () => {
     };
 
     return (
-        <div>
+        <Form.Item labelCol={{ span: 8 }} label="Màu chữ">
             <Input.Group>
                 <Row gutter={8}>
                     <Col span={12}>
-                        <Input onChange={onInputChange} value={color} />
+                        <Form.Item name={[side, 'color']}>
+                            <Input onChange={onInputChange} value={color} />
+                        </Form.Item>
                     </Col>
                     <Col span={8}>
                         <div style={styles.swatch} onClick={handleClick}>
@@ -79,7 +81,7 @@ const ColorPicker = () => {
                     <BlockPicker color={color} onChange={handleChange} />
                 </div>
             )}
-        </div>
+        </Form.Item>
     );
 };
 

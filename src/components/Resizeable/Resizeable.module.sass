@@ -1,0 +1,33 @@
+.draghandle
+    position: absolute
+
+    width: 12px
+    height: 12px
+    background-color: transparent
+    border: 1px solid grey
+    border-radius: 50%
+    background-color: #fff
+    &.bottom-right
+        bottom: 0
+        right: 0
+        transform: translate(50%, 50%)
+        &:hover
+            cursor: se-resize
+    &.top-right
+        top: 0
+        right: 0
+        transform: translate(50%, -50%)
+        &:hover
+            cursor: se-resize
+    &.bottom-left
+        bottom: 0
+        left: 0
+        transform: translate(-50%, 50%)
+        &:hover
+            cursor: se-resize
+    &.top-left
+        top: 0
+        left: 0
+        transform: translate(-50%, -50%)
+        &:hover
+            cursor: se-resize
